@@ -1,8 +1,9 @@
 <?php
 
-namespace Bhavinjr\Wishlist;
+namespace javcorreia\Wishlist;
 
-use Bhavinjr\Wishlist\Models\Wishlist as WishlistModel;
+use Illuminate\Support\Facades\DB;
+use javcorreia\Wishlist\Models\Wishlist as WishlistModel;
 
 class Wishlist
 {
@@ -10,58 +11,148 @@ class Wishlist
 
 	public function __construct()
     {
-    	$this->instance     =   $this->getWishlist();   
+    	$this->instance = new WishlistModel;
     }
 
-    protected function getWishlist()
+    /**
+     * Adds a product to the wishlist associating it to a given user.
+     * Returns false on failure.
+     *
+     * @param $item
+     * @param $user
+     * @param string $type
+     * @return bool
+     */
+    public function add($item, $user, $type='user') {
+        return Wishlist::create($item, $user, $type);
+    }
+
+    /**
+     * Returns the wishlist of a specified user.
+     *
+     * @param $user
+     * @param string $type
+     * @return mixed
+     */
+    public function getUserWishList($user, $type='user')
     {
-    	$wishlistModel = new WishlistModel;
-    	return $wishlistModel;
+        return $this->instance->ofUser($user, $type)->get();
     }
 
-    public function add($product_id,$user_id)
+    /**
+     * Removes a specific wishlist entry from a given user.
+     *
+     * @param $id
+     * @param $user
+     * @param string $type
+     * @return mixed
+     */
+    public function remove($id, $user, $type='user')
     {
-    	$this->create($product_id,$user_id);
+        $wishList = $this->instance->where('id', $id)
+            ->ofUser($user, $type)->first();
+
+        if (!$wishList) {
+            return false;
+        }
+
+        return $wishList->delete();
     }
 
-    public function getUserWishlist($user_id)
+    /**
+     * Removes all values from a user wishlist.
+     *
+     * @param $user
+     * @param $type
+     * @return mixed
+     */
+    public function removeUserWishList($user, $type='user')
     {
-    	return $this->instance->ofUser($user_id)->get();
+        return $this->instance->ofUser($user, $type)->delete();
     }
 
-    public function remove($id)
+    /**
+     * Removes a specific item from a specified user.
+     *
+     * @param $item
+     * @param $user
+     * @param string $type
+     * @return mixed
+     */
+    public function removeByItem($item, $user, $type='user')
     {
-    	$this->instance->where('id', $id)->first()->delete();
+        return $this->getWishListItem($item, $user, $type)->delete();
     }
 
-    public function removeUserWishlist($user_id)
+    /**
+     * Number of wishlist items by user
+     *
+     * @param $user
+     * @param string $type
+     * @return mixed
+     */
+    public function count($user, $type='user')
     {
-    	$this->instance->ofUser($user_id)->delete();
+        return $this->instance->ofUser($user, $type)->count();
     }
 
-    public function removeByProduct($product_id,$user_id)
+    /**
+     * Get wishlist item from a user
+     *
+     * @param $item
+     * @param $user
+     * @param string $type
+     * @return mixed
+     */
+    public function getWishListItem($item, $user, $type='user')
     {
-        $this->getWishlistItem($product_id,$user_id)->delete();
+        return $this->instance->byItem($item)
+            ->ofUser($user, $type)->first();
     }
 
-    protected function create($product_id,$user_id)
+    /**
+     * Associates a session_id wishlist to a given user_id wishlist.
+     *
+     * @param $user_id
+     * @param $session_id
+     * @return bool
+     */
+    public function assocSessionWishListToUser($user_id, $session_id)
     {
-    	$matchThese	=   ['product_id'   =>  $product_id,'user_id' => $user_id];
+        $sessionWishList = $this->getUserWishList($session_id, 'session');
+        if ($sessionWishList->isEmpty()) {
+            return true;
+        }
 
-    	$wishlist 	=	WishlistModel::updateOrcreate($matchThese, 
-        				$matchThese);
-    	return $wishlist;
+        try {
+            DB::transaction(function () use ($sessionWishList, $user_id, $session_id) {
+                foreach ($sessionWishList as $sessionItem) {
+                    $association = Wishlist::create($sessionItem->item_id, $user_id);
+                    if (!$association) {
+                        throw new \Exception('Error');
+                    }
+                }
+
+                $this->removeUserWishList($session_id, 'session');
+            });
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 
-    public function count($user_id)
+    protected static function create($item, $user, $type='user')
     {
-        return $this->instance->ofUser($user_id)->count();
-    }
+        $column = ($type === 'user') ? 'user_id' : 'session_id';
 
-    public function getWishlistItem($product_id,$user_id)
-    {
-        return $this->instance->byProduct($product_id)
-                              ->ofUser($user_id)->first();
-    }
+        $matchThese = [
+            'item_id' => $item,
+            $column => $user
+        ];
 
+        $wishList =	WishlistModel::updateOrCreate($matchThese, $matchThese);
+
+        return (!$wishList) ? false : true;
+    }
 }

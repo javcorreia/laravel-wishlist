@@ -1,6 +1,6 @@
 {
-    "name": "bhavinjr/laravel-wishlist",
-    "description": "wishlist for laravel 5.*.*",
+    "name": "javcorreia/laravel-wishlist",
+    "description": "wishlist for laravel 5.*",
     "keywords": [
       "laravel", "laravel wishlist", "wishlist laravel", "wishlist","ecommerce laravel wishlist", "laravel ecommerce"
     ],
@@ -10,25 +10,33 @@
         {
             "name": "Bhavin Rudani",
             "email": "bhavinrudani94@gmail.com"
+        },
+        {
+            "name": "José Correia",
+            "email": "javcorreia@gmail.com"
         }
     ],
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.6.0",
-        "illuminate/support": "5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*"
+        "illuminate/support": "^5.1"
+    },
+    "require-dev": {
+        "illuminate/session": "^5.1",
+        "illuminate/database": "^5.1"
     },
     "autoload": {
         "psr-4": {
-            "Bhavinjr\\Wishlist\\": "src/"
+            "javcorreia\\Wishlist\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Bhavinjr\\Wishlist\\Providers\\WishlistServiceProvider"
+                "javcorreia\\Wishlist\\Providers\\WishlistServiceProvider"
             ],
             "aliases": {
-                "Wishlist": "Bhavinjr\\Wishlist\\Facades\\Wishlist"
+                "Wishlist": "javcorreia\\Wishlist\\Facades\\Wishlist"
             }
         }
     }

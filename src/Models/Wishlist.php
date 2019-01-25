@@ -1,26 +1,34 @@
 <?php
 
-namespace Bhavinjr\Wishlist\Models;
+namespace javcorreia\Wishlist\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Wishlist extends Model
 {
-    protected $fillable = ['user_id', 'product_id'];
+    protected $fillable = ['user_id', 'session_id', 'item_id'];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->table = config('wishlist.table_name');
+    }
 
     public function product()
     {
-        return $this->belongsTo(config('wishlist.product_model'),'product_id');
+        return $this->belongsTo(config('wishlist.item_model'),'item_id');
     }
 
-    public function scopeOfUser($query,$user_id)
+    public function scopeOfUser($query, $user, $type)
     {
-        return $query->where('user_id',$user_id);
+        $column = ($type === 'user') ? 'user_id' : 'session_id';
+
+        return $query->where($column, $user);
     }
 
-    public function scopeByProduct($query,$product_id)
+    public function scopeByItem($query, $item)
     {
-        return $query->where('product_id',$product_id);
+        return $query->where('item_id', $item);
     }
 }

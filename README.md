@@ -1,63 +1,61 @@
 # laravel-wishlist
 
-A simple Wishlist implementation for Laravel 5.*.*.
+A simple Wishlist implementation for Laravel 5.  
 
-[![Latest Stable Version](https://poser.pugx.org/bhavinjr/laravel-wishlist/v/stable)](https://packagist.org/packages/bhavinjr/laravel-wishlist)
-[![Total Downloads](https://poser.pugx.org/bhavinjr/laravel-wishlist/downloads)](https://packagist.org/packages/bhavinjr/laravel-wishlist)
-[![License](https://poser.pugx.org/bhavinjr/laravel-wishlist/license)](https://packagist.org/packages/bhavinjr/laravel-wishlist)
+This is fork of the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist).
+
+I've added the possibility to save a wishlist associated with a custom session id, instead of just a user_id, making it more flexible in the appropriate use cases.  
+
+Hence, the table was changed a bit, as well as the methods.
 
 ## Installation
 
-First, you'll need to install the package via Composer:
-
+Is installed via [Composer](http://getcomposer.org) by running in your project's root:
 ```shell
-$ composer require bhavinjr/laravel-wishlist
+$ composer require javcorreia/laravel-wishlist
 ```
 
-If you are don't use using Laravel 5.5.* Then, update `config/app.php` by adding an entry for the service provider.
+> If you're using Laravel >=5.5 you may skip the next step.
 
+To use the Wishlist Service Provider, you must register the provider when bootstrapping your Laravel application.
+
+Find the `providers` key in your `config/app.php` and register the Service Provider.
 
 ```php
 'providers' => [
     // ...
-    Bhavinjr\Wishlist\Providers\WishlistServiceProvider::class,
+    javcorreia\Wishlist\Providers\WishlistServiceProvider::class,
 ];
 
 'aliases' => [
     //...
-    "Wishlist": "Bhavinjr\Wishlist\Facades\Wishlist",
+    "Wishlist": "javcorreia\Wishlist\Facades\Wishlist",
 ];
 ```
 
-In command line paste this command:
+Publish the default configuration file:
 ```shell
-php artisan config:cache
+php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
 ```
+**Before running migration**, edit the required settings using the resulting `config/wishlist.php` file _([See Configuration](#Configuration))_.
 
-In command line again, publish the default configuration file:
-```shell
-php artisan vendor:publish --provider="Bhavinjr\Wishlist\Providers\WishlistServiceProvider"
-```
-
-In command line paste this command:
+To create the table run migrations:
 ```shell
 php artisan migrate
 ```
 
+## Configuration 
 
-## Configuration
-
-Configuration was designed to be as flexible.
-global configuration can be set in the `config/wishlist.php` file.
-
+Configuration was designed to be as flexible as changing the global configuration in the `config/wishlist.php` file.
 
 ```<?php
 return [
-    'product_model'         =>  'App\Models\Product',
+    'item_model' => 'App\Models\Product',
+    'table_name' => 'wishlists',
 ];
 ```
 
-after update `config/wishlist.php` file.
+after updating the `config/wishlist.php` file execute the following command:  
 ```shell
 php artisan config:cache
 ```
@@ -68,68 +66,124 @@ The package gives you the following methods to use:
 
 Adding an item to the wishlist is really simple 
 
-you need specify product_id and user_id respectively all parameter are compulsory
+you need specify the **item** to add and the **user** to add it to respectively.  
+These two parameters are required. 
 
-### Wishlist::add()
+> **type** ['user', 'session'] is an optional parameter wich tells the service if the user is an application authenticated user_id or  
+a custom session/cookie id.  
+
+### Wishlist::add(item, user[, type='user'])
 
 ```php
+// add item to user_id
 Wishlist::add(15, 1);
+
+// add item to session_id
+Wishlist::add(15, 'CUSTOM_SESSION_ID', 'session');
 ```
 
-### Wishlist::remove()
+### Wishlist::remove(id, user[, type='user'])
 
-To remove an item from the wishlist, specify the wishlist_id.
+To remove an item from the wishlist, specify the wishlist_id and the user associated with the item. 
+
+> **type** ['user', 'session'] is an optional parameter wich tells the service if the user is an application authenticated user_id or  
+a custom session/cookie id.
 
 ```php
-Wishlist::remove(2);
+// remove item from user_id
+Wishlist::remove(2, 1);
+
+// remove item from session_id
+Wishlist::remove(2, 'CUSTOM_SESSION_ID', 'session');
 ```
 
-### Wishlist::getUserWishlist()
+### Wishlist::getUserWishList(user[, type='user'])
 
-To get users all wishlist item, specify the user_id.
+To get all wishlist items from a user, specify the user_id. 
+
+> **type** ['user', 'session'] is an optional parameter wich tells the service if the user is an application authenticated user_id or  
+a custom session/cookie id.
 
 ```php
-Wishlist::getUserWishlist(1);
+// get all items from user_id
+Wishlist::getUserWishList(1);
+
+// get all items from session_id
+Wishlist::getUserWishList('CUSTOM_SESSION_ID', 'session');
 ```
 
-### Wishlist::removeUserWishlist()
+### Wishlist::removeUserWishList(user[, type='user'])
 
-To remove users all wishlist item, specify the user_id.
+To remove all wishlist items from a user, specify the user_id. 
+
+> **type** ['user', 'session'] is an optional parameter wich tells the service if the user is an application authenticated user_id or  
+a custom session/cookie id.
 
 ```php
-Wishlist::removeUserWishlist(1);
+// remove all items from user_id
+Wishlist::removeUserWishList(1);
+
+// remove all items from session_id
+Wishlist::removeUserWishList('CUSTOM_SESSION_ID');
 ```
 
-### Wishlist::removeByProduct()
+### Wishlist::removeByItem(item, user[, type='user'])
 
-To remove particular product using product_id, specify the product_id and user_id respectively.
+To remove a particular item, specify the item and user respectively. 
+
+> **type** ['user', 'session'] is an optional parameter wich tells the service if the user is an application authenticated user_id or  
+a custom session/cookie id.
 
 ```php
-Wishlist::removeByProduct(15, 1);
+// remove item from user_id
+Wishlist::removeByItem(15, 1);
+
+// remove item from session_id
+Wishlist::removeByItem(15, 'CUSTOM_SESSION_ID', 'session');
 ```
 
 
-### Wishlist::count()
+### Wishlist::count(user[, type='user'])
 
-To count users all wishlist item, specify the user_id.
+Total wishlist items from a user.
 
 ```php
+// total items from user_id
 Wishlist::count(1);
+
+// total items from session_id
+Wishlist::count('CUSTOM_SESSION_ID', 'session');
 ```
 
-### Wishlist::getWishlistItem()
+### Wishlist::getWishListItem(item, user[, type='user'])
 
-To get particular wishlist item, specify the product_id and user_id respectively
+To get particular wishlist item, specify the item and user respectively. 
+
+> **type** ['user', 'session'] is an optional parameter wich tells the service if the user is an application authenticated user_id or  
+a custom session/cookie id.
 
 ```php
-Wishlist::getWishlistItem(15, 1);
+// get item from user_id
+Wishlist::getWishListItem(15, 1);
+
+// get item from session_id
+Wishlist::getWishListItem(15, 'CUSTOM_SESSION_ID', 'session');
 ```
 
+### Wishlist::assocSessionWishListToUser(user_id, session_id)
+
+To associate a particular session_id wishlist to an authenticated user.  
+A user who has number of favorites while unlogged, if he logins, this method could be run to preserve the potentialy new wishlist items.
+
+```php
+// get item from user_id
+Wishlist::assocSessionWishListToUser(1, 'CUSTOM_SESSION_ID');
+```
 
 You can also load product detail
 
 ```php
-$result  =  Wishlist::getUserWishlist(1)->load('product');
+$result  =  Wishlist::getUserWishList(1)->load('item');
 
 or you can also access directly
 ```
