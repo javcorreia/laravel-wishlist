@@ -2,12 +2,12 @@
 
 A simple Wishlist implementation for Laravel 5.
 
-[![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable)](https://packagist.org/packages/javcorreia/laravel-wishlist)
-[![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license)](https://packagist.org/packages/javcorreia/laravel-wishlist)  
+[![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+[![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)  
 
 This is fork of the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist).
 
-I've added the possibility to save a wishlist associated with a custom session id, instead of just a user_id, making it more flexible in the appropriate use cases.  
+I've added the possibility to save a wishlist associated with a custom session id, instead of just a user_id, making it more flexible.  
 
 Hence, the table was changed a bit, as well as the methods.
 
@@ -38,20 +38,20 @@ Find the `providers` key in your `config/app.php` and register the Service Provi
 
 Publish the default configuration file:
 ```shell
-php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
+$ php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
 ```
 **Before running migration**, edit the required settings using the resulting `config/wishlist.php` file _([See Configuration](#Configuration))_.
 
 To create the table run migrations:
 ```shell
-php artisan migrate
+$ php artisan migrate
 ```
 
 ## Configuration 
 
 Configuration was designed to be as flexible as changing the global configuration in the `config/wishlist.php` file.
 
-```<?php
+```php
 return [
     'item_model' => 'App\Models\Product',
     'table_name' => 'wishlists',
@@ -60,7 +60,7 @@ return [
 
 after updating the `config/wishlist.php` file execute the following command:  
 ```shell
-php artisan config:cache
+$ php artisan config:cache
 ```
 
 ## Usage
@@ -183,10 +183,12 @@ A user who has number of favorites while unlogged, if he logins, this method cou
 Wishlist::assocSessionWishListToUser(1, 'CUSTOM_SESSION_ID');
 ```
 
-You can also load product detail
-
+You can the load item detail using laravel Eloquent association:
 ```php
-$result  =  Wishlist::getUserWishList(1)->load('item');
-
-or you can also access directly
+$result = Wishlist::getUserWishList(1)->load('item');
+```
+or you can access it directly invoking the appropriate Eloquent model
+```php
+$result = Wishlist::getUserWishList(1);
+$product = Product::find($result->id);
 ```

@@ -15,7 +15,7 @@ class Wishlist extends Model
         $this->table = config('wishlist.table_name');
     }
 
-    public function product()
+    public function item()
     {
         return $this->belongsTo(config('wishlist.item_model'),'item_id');
     }
