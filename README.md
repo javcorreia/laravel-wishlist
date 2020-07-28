@@ -1,6 +1,6 @@
 # laravel-wishlist
 
-A simple Wishlist implementation for Laravel 5.
+A simple Wishlist implementation for Laravel 5.8|6|7.
 
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)  
@@ -16,24 +16,6 @@ Hence, the table was changed a bit, as well as the methods.
 Is installed via [Composer](http://getcomposer.org) by running in your project's root:
 ```shell
 $ composer require javcorreia/laravel-wishlist
-```
-
-> If you're using Laravel >=5.5 you may skip the next step.
-
-To use the Wishlist Service Provider, you must register the provider when bootstrapping your Laravel application.
-
-Find the `providers` key in your `config/app.php` and register the Service Provider.
-
-```php
-'providers' => [
-    // ...
-    javcorreia\Wishlist\Providers\WishlistServiceProvider::class,
-];
-
-'aliases' => [
-    //...
-    "Wishlist": "javcorreia\Wishlist\Facades\Wishlist",
-];
 ```
 
 Publish the default configuration file:
