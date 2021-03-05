@@ -18,6 +18,24 @@ Is installed via [Composer](http://getcomposer.org) by running in your project's
 $ composer require javcorreia/laravel-wishlist
 ```
 
+> If you're using Laravel >=5.5 you may skip the next step.
+
+To use the Wishlist Service Provider, you must register the provider when bootstrapping your Laravel application.
+
+Find the `providers` key in your `config/app.php` and register the Service Provider.
+
+```php
+'providers' => [
+    // ...
+    javcorreia\Wishlist\Providers\WishlistServiceProvider::class,
+];
+
+'aliases' => [
+    //...
+    "Wishlist": "javcorreia\Wishlist\Facades\Wishlist",
+];
+```
+
 Publish the default configuration file:
 ```shell
 $ php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
