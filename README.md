@@ -1,6 +1,6 @@
 # laravel-wishlist
 
-A simple Wishlist implementation for Laravel 5.
+A simple Wishlist implementation for Laravel 5.8|6|7.
 
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)  
