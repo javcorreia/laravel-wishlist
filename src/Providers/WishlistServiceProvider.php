@@ -27,7 +27,7 @@ class WishlistServiceProvider extends ServiceProvider
     {
         $config = __DIR__ . '/../../config/wishlist.php';
         $this->mergeConfigFrom($config, 'wishlist');
-        $this->app->singleton('wishlist', Wishlist::class);
+        $this->app->singleton('Wishlist', Wishlist::class);
     }
 
     /**
