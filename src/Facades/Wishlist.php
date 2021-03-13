@@ -1,6 +1,6 @@
 <?php 
 
-namespace Bhavinjr\Wishlist\Facades;
+namespace javcorreia\Wishlist\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -13,7 +13,7 @@ class Wishlist extends Facade {
      */
 	protected static function getFacadeAccessor()
 	{
-		return 'wishlist';
+		return 'Wishlist';
 	}
 	
 }
