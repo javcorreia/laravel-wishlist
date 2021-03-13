@@ -7,11 +7,11 @@ return [
     | Custom model
     |--------------------------------------------------------------------------
     |
-    | This option allows for the extension of the item model, by pointing it to a laravel model, e.g
-	| 'App\Models\Product'
+    | This option defines the item model, by pointing it to a laravel model, e.g
+	| App\Models\Product::class
     |
     */
-    'item_model' => 'NAMESPACE_FOR_LARAVEL_MODEL_FILE',
+    'item_model' => 'LARAVEL_PRODUCT_MODEL',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,5 +22,15 @@ return [
     |
     */
     'table_name' => 'wishlist',
-    
+
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Wishlist model
+    |--------------------------------------------------------------------------
+    |
+    | This option allows for the extension or creation of a new wishlist Model
+	| App\Models\MyWishlist::class
+    |
+    */
+    'model' => \javcorreia\Wishlist\Models\Wishlist::class
 ];

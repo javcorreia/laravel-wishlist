@@ -3,15 +3,16 @@
 namespace javcorreia\Wishlist;
 
 use Illuminate\Support\Facades\DB;
-use javcorreia\Wishlist\Models\Wishlist as WishlistModel;
 
 class Wishlist
 {
+    public $modelInstance;
 	public $instance;
 
 	public function __construct()
     {
-    	$this->instance = new WishlistModel;
+        $this->wishlistModel = config('wishlist.model');
+    	$this->instance = new $this->wishlistModel;
     }
 
     /**
@@ -151,7 +152,7 @@ class Wishlist
             $column => $user
         ];
 
-        $wishList =	WishlistModel::updateOrCreate($matchThese, $matchThese);
+        $wishList =	config('wishlist.model')::updateOrCreate($matchThese, $matchThese);
 
         return (!$wishList) ? false : true;
     }
