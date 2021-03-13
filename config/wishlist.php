@@ -28,7 +28,7 @@ return [
     | Custom Wishlist model
     |--------------------------------------------------------------------------
     |
-    | This option allows for the extension or creation of a new wishlist Model
+    | This option allows for the extension of the wishlist Model
 	| App\Models\MyWishlist::class
     |
     */
