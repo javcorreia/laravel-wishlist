@@ -19,11 +19,11 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.2",
-        "illuminate/support": "^5.8|^6.0|^7.0|^8.0"
+        "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0"
     },
     "require-dev": {
-        "illuminate/session": "^5.8|^6.0|^7.0|^8.0",
-        "illuminate/database": "^5.8|^6.0|^7.0|^8.0"
+        "illuminate/session": "^5.8|^6.0|^7.0|^8.0|^9.0",
+        "illuminate/database": "^5.8|^6.0|^7.0|^8.0|^9.0"
     },
     "autoload": {
         "psr-4": {
