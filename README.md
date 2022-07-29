@@ -4,6 +4,7 @@ A simple Wishlist implementation for Laravel 5.8|6.\*|7.\*|8.\*|9.\*.
 
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+[![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 
 This is fork of the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist).
 
