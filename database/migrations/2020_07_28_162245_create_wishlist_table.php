@@ -21,9 +21,6 @@ class CreateWishlistTable extends Migration
             $table->char('session_id', 191)->nullable(true);
             $table->integer('item_id')->unsigned();
             $table->timestamps();
-
-            // index
-            $table->index('user_id', $schemaTableName . '_user_id_index');
         });
     }
 

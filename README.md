@@ -1,6 +1,7 @@
 # laravel-wishlist
 
-A simple Wishlist implementation for Laravel 10.\* [^1]
+A simple Wishlist implementation for Laravel 5.8|6.\*|7.\*|8.\*|9.\*|10.\*
+> **If you have problems with the minimum PHP version of 8.0:** install previous stable version 2.2
 
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
@@ -47,17 +48,90 @@ After updating the `config/wishlist.php` file execute the following command to c
 $ php artisan config:cache
 ```
 
-## Extending Base Model to use Soft Deletes
-If needed you can create a Model file, extend the base Wishlist model and add `SoftDeletes` trait.
+## Extending the Base Model to extra functionalities
+If needed you can create a Model file, extend the base Wishlist model to add extra functionalities.  
+In the following example, we'll add the `SoftDeletes` trait to have soft deletes in the wishlist table.
+### Create a migration to add soft delete functionality to the wishlist table
+```shell
+$ php artisan make:migration add_softdelete_to_wishlist
+```
+In the migration:
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        $schemaTableName = config('wishlist.table_name');
+
+        Schema::table($schemaTableName, function (Blueprint $table) {
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        $schemaTableName = config('wishlist.table_name');
+
+        Schema::table($schemaTableName, function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+    }
+}; 
+```
+Run migrate to update table:
+```shell
+$ php artisan migrate
+```
+### Extend the base model
+Create the model:
+```shell
+$ php artisan make:model MyWishlist
+```
+Add the `SoftDeletes` trait:
 ```php
 namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use javcorreia\Wishlist\Models\Wishlist as BaseWishlist;
-class Wishlist extends BaseWishlist
+
+class MyWishlist extends BaseWishlist
 {
     use SoftDeletes;
 }
+```
+### Change config to use your new Model class
+In `wishlist.php` config file:
+```php
+<?php
+
+return [
+
+    // (...)
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Wishlist model
+    |--------------------------------------------------------------------------
+    |
+    | This option allows for the extension of the wishlist Model
+	| App\Models\MyWishlist::class
+    |
+    */
+    'model' => App\Models\MyWishlist::class
+
+];
 ```
 
 ## Usage
@@ -198,5 +272,3 @@ or you can access it directly invoking the appropriate Eloquent model
 $result = Wishlist::getUserWishList(1);
 $product = Product::find($result->id);
 ```
-
-[^1]: For Laravel 5.8|6.\*|7.\*|8.\*|9.\*. install versions <= 2.2
