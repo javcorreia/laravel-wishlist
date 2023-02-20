@@ -1,12 +1,12 @@
 # laravel-wishlist
 
-A simple Wishlist implementation for Laravel 5.8|6.\*|7.\*|8.\*|9.\*.
+A simple Wishlist implementation for Laravel 10.\* [^1]
 
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 
-This is fork of the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist).
+This is a fork of the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist).
 
 I've added the possibility to save a wishlist associated with a custom session id, instead of just a user_id, making it more flexible.  
 It's also possible to extend the default Model wishlist model to add soft deletes possibility, if needed.  
@@ -62,7 +62,7 @@ class Wishlist extends BaseWishlist
 
 ## Usage
 Just use the provided facade to access its methods.
-> **Hint:** use [Laravel IDE Helper Generator](https://github.com/barryvdh/laravel-ide-helper) for methods code completion
+> **Hint:** use [Laravel IDE Helper Generator](https://github.com/barryvdh/laravel-ide-helper) to have code completion on facade methods
 ```php
 namespace App\Http\Controllers;
 
@@ -198,3 +198,5 @@ or you can access it directly invoking the appropriate Eloquent model
 $result = Wishlist::getUserWishList(1);
 $product = Product::find($result->id);
 ```
+
+[^1]: For Laravel 5.8|6.\*|7.\*|8.\*|9.\*. install versions <= 2.2

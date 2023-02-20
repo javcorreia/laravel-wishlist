@@ -2,7 +2,9 @@
 
 namespace javcorreia\Wishlist\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Wishlist extends Model
 {
@@ -15,20 +17,20 @@ class Wishlist extends Model
         $this->table = config('wishlist.table_name');
     }
 
-    public function item()
+    public function item(): BelongsTo
     {
         return $this->belongsTo(config('wishlist.item_model'),'item_id');
     }
 
-    public function scopeOfUser($query, $user, $type)
+    public function scopeOfUser(Builder $query, int|string $user, string $type): Builder
     {
         $column = ($type === 'user') ? 'user_id' : 'session_id';
 
-        return $query->where($column, $user);
+        return $query->where($column, '=', $user);
     }
 
-    public function scopeByItem($query, $item)
+    public function scopeByItem(Builder $query, int $item): Builder
     {
-        return $query->where('item_id', $item);
+        return $query->where('item_id', '=', $item);
     }
 }
