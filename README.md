@@ -1,18 +1,19 @@
-# laravel-wishlist
+# Laravel Wishlist
 
-A simple Wishlist implementation for Laravel 5.8|6.\*|7.\*|8.\*|9.\*|10.\*
+A simple Wishlist implementation for Laravel 11.\*
+> **For Laravel versions 5.8|6|7|8|9|10** install previous stable version 3.1  
 > **If you have problems with the minimum PHP version of 8.0:** install previous stable version 2.2
 
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 
-This is a fork of the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist).
+- saves items associated with users
+- saves items associated with sessions on anonymous navigation
+- can retrieve items from a user or session
+- session items can be retrieved and associated with user on login
 
-I've added the possibility to save a wishlist associated with a custom session id, instead of just a user_id, making it more flexible.  
-It's also possible to extend the default Model wishlist model to add soft deletes possibility, if needed.  
-
-Hence, the table was changed a bit, as well as the methods.
+> This was forked from the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist) with added functionality.
 
 ## Installation
 

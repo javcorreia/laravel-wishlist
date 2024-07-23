@@ -18,16 +18,18 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.0",
-        "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0"
+        "php": "^8.1",
+        "illuminate/support": "^11.0"
     },
     "require-dev": {
-        "illuminate/session": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-        "illuminate/database": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0"
+        "pestphp/pest": "^2.34",
+        "orchestra/testbench": "^9.2",
+        "pestphp/pest-plugin-laravel": "^2.3"
     },
     "autoload": {
         "psr-4": {
-            "javcorreia\\Wishlist\\": "src/"
+            "javcorreia\\Wishlist\\": "src/",
+            "javcorreia\\Wishlist\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -38,6 +40,11 @@
             "aliases": {
                 "Wishlist": "javcorreia\\Wishlist\\Facades\\Wishlist"
             }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     }
 }
