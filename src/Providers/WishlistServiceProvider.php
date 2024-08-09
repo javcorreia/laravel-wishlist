@@ -29,7 +29,7 @@ class WishlistServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($config, 'wishlist');
         $this->app->singleton('Wishlist', Wishlist::class);
     }
-
+    // @codeCoverageIgnoreStart
     /**
      * Get the services provided by the provider.
      *
@@ -52,4 +52,5 @@ class WishlistServiceProvider extends ServiceProvider
             __DIR__.'/../../database/migrations/' => database_path('/migrations')
         ], 'migrations');
     }
+    // @codeCoverageIgnoreEnd
 }

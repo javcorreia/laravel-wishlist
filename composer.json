@@ -2,7 +2,12 @@
     "name": "javcorreia/laravel-wishlist",
     "description": "a wishlist for laravel",
     "keywords": [
-      "laravel", "laravel wishlist", "wishlist laravel", "wishlist","ecommerce laravel wishlist", "laravel ecommerce"
+        "laravel",
+        "laravel wishlist",
+        "wishlist laravel",
+        "wishlist",
+        "ecommerce laravel wishlist",
+        "laravel ecommerce"
     ],
     "type": "library",
     "license": "MIT",
@@ -46,5 +51,32 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse"
+        ],
+        "test": [
+            "@php vendor/bin/pest"
+        ]
     }
 }

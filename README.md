@@ -273,3 +273,12 @@ or you can access it directly invoking the appropriate Eloquent model
 $result = Wishlist::getUserWishList(1);
 $product = Product::find($result->id);
 ```
+## Testing
+Compose require dev packages.  
+The tests are done with resource to [PestPHP](https://pestphp.com/) and [Testbench](https://github.com/orchestral/testbench).  
+To execute them run the following:
+```shell
+vendor/bin/testbench db:migrate
+vendor/bin/testbench db:seed --class=\\Workbench\\Database\\Seeders\\DatabaseSeeder
+vendor/bin/pest
+```
