@@ -5,7 +5,7 @@ If needed you can create a Model file, extend the base Wishlist model to add ext
 In the following example, we'll add the `SoftDeletes` trait to have soft deletes in the wishlist table.
 ### Create a migration to add soft delete functionality to the wishlist table
 ```shell
-$ php artisan make:migration add_softdelete_to_wishlist
+php artisan make:migration add_softdelete_to_wishlist
 ```
 In the migration:
 ```php
@@ -44,12 +44,12 @@ return new class extends Migration
 ```
 Run migrate to update table:
 ```shell
-$ php artisan migrate
+php artisan migrate
 ```
 ### Extend the base model
 Create the model:
 ```shell
-$ php artisan make:model MyWishlist
+php artisan make:model MyWishlist
 ```
 Add the `SoftDeletes` trait:
 ```php

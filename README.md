@@ -19,18 +19,18 @@ A simple Wishlist implementation for Laravel 11.\*
 
 Is installed via [Composer](http://getcomposer.org) by running in your project's root.  
 ```shell
-$ composer require javcorreia/laravel-wishlist
+composer require javcorreia/laravel-wishlist
 ```
 
 Publish the default configuration file:
 ```shell
-$ php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
+php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
 ```
 **Before running migration**, edit the required settings using the resulting `config/wishlist.php` file _([See Configuration](#Configuration))_.
 
 To create the table run migrations:
 ```shell
-$ php artisan migrate
+php artisan migrate
 ```
 
 ## Configuration 
@@ -46,7 +46,7 @@ The other values can be the default ones, unless changes are needed.
   
 After updating the `config/wishlist.php` file execute the following command to cache configs:  
 ```shell
-$ php artisan config:cache
+php artisan config:cache
 ```
 
 ## Documentation
