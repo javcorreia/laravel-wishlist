@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class Wishlist
 {
-	public $instance;
+	public Model $instance;
+    private string $wishlistModel;
 
-	public function __construct()
+    public function __construct()
     {
         $this->wishlistModel = config('wishlist.model');
     	$this->instance = new $this->wishlistModel;
