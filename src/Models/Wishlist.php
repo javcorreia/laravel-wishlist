@@ -1,11 +1,18 @@
 <?php
+
 // @codeCoverageIgnoreStart
+
 namespace javcorreia\Wishlist\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $item_id
+ * @method Builder|static ofUser(int|string $user, string $type)
+ * @method Builder|static byItem(int $item)
+ */
 class Wishlist extends Model
 {
     protected $fillable = ['user_id', 'session_id', 'item_id'];
@@ -19,7 +26,7 @@ class Wishlist extends Model
 
     public function item(): BelongsTo
     {
-        return $this->belongsTo(config('wishlist.item_model'),'item_id');
+        return $this->belongsTo(config('wishlist.item_model'), 'item_id');
     }
 
     public function scopeOfUser(Builder $query, int|string $user, string $type): Builder

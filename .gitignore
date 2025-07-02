@@ -3,3 +3,4 @@
 composer.lock
 docker
 tests/coverage
+vendor
