@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace javcorreia\Wishlist;
 
 use Illuminate\Database\Eloquent\Collection;
@@ -25,11 +27,13 @@ class Wishlist
      */
     public function add(int $item, int|string $user, string $type = 'user'): bool
     {
-        return Wishlist::create($item, $user, $type);
+        return self::create($item, $user, $type);
     }
 
     /**
      * Returns the wishlist of a specified user.
+     *
+     * @return Collection<int,WishlistModel|Model>
      */
     public function getUserWishList(int|string $user, string $type = 'user'): Collection
     {
@@ -97,7 +101,7 @@ class Wishlist
         try {
             DB::transaction(function () use ($sessionWishList, $user_id, $session_id) {
                 foreach ($sessionWishList as $sessionItem) {
-                    $association = Wishlist::create($sessionItem->item_id, $user_id);
+                    $association = Wishlist::create($sessionItem->getAttribute('item_id'), $user_id);
                     if (! $association) {
                         throw new \Exception('Error');
                     }

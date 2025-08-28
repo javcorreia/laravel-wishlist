@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // @codeCoverageIgnoreStart
 
 namespace javcorreia\Wishlist\Models;
@@ -10,8 +12,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $item_id
+ *
  * @method Builder|static ofUser(int|string $user, string $type)
  * @method Builder|static byItem(int $item)
+ * @method Wishlist get()
  */
 class Wishlist extends Model
 {

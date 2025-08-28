@@ -1,6 +1,6 @@
 # Laravel Wishlist
 
-A simple Wishlist implementation for Laravel 11.\*
+A simple Wishlist implementation for Laravel 11.\*|12.\*
 > **For Laravel versions 5.8|6|7|8|9|10** install previous stable version 3.1  
 > **If you have problems with the minimum PHP version of 8.0:** install previous stable version 2.2
 

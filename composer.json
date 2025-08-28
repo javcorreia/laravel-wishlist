@@ -74,11 +74,18 @@
             "@build",
             "@php vendor/bin/testbench serve"
         ],
+        "analyse": [
+            "@php vendor/bin/phpstan analyse src --level 5"
+        ],
         "lint": [
-            "@php vendor/bin/phpstan analyse"
+            "@php vendor/bin/pint src"
         ],
         "test": [
-            "@php vendor/bin/pest"
+            "@php vendor/bin/testbench workbench:create-sqlite-db",
+            "@php vendor/bin/testbench migrate",
+            "@php vendor/bin/testbench db:seed --class=\\\\Workbench\\\\Database\\\\Seeders\\\\DatabaseSeeder",
+            "@php vendor/bin/pest --coverage-html tests/code-coverage",
+            "@php vendor/bin/testbench workbench:drop-sqlite-db"
         ]
     }
 }
