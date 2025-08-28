@@ -5,10 +5,8 @@ The tests are done with [PestPHP](https://pestphp.com/) and [Testbench](https://
 Compose require dev packages.
 To execute them run the following:
 ```shell
-vendor/bin/testbench db:migrate
-vendor/bin/testbench db:seed --class=\\Workbench\\Database\\Seeders\\DatabaseSeeder
-vendor/bin/pest
+composer test
 ```
 
 ## Current code coverage
-![Code coverage](tests/code_coverage.png)
+![Code coverage](tests/code-coverage/code_coverage.png)

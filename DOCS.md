@@ -1,5 +1,17 @@
 # Documentation
 
+# Table of contents
+- [Extend base model](#extending-the-base-model-to-extra-functionalities)
+- [Usage](#usage)
+  - [Wishlist::add](#wishlistadditem-user-typeuser)
+  - [Wishlist::remove](#wishlistremoveid-user-typeuser)
+  - [Wishlist::getUserWishList](#wishlistgetuserwishlistuser-typeuser)
+  - [Wishlist::removeUserWishList](#wishlistremoveuserwishlistuser-typeuser)
+  - [Wishlist::removeByItem](#wishlistremovebyitemitem-user-typeuser)
+  - [Wishlist::count](#wishlistcountuser-typeuser)
+  - [Wishlist::getWishListItem](#wishlistgetwishlistitemitem-user-typeuser)
+  - [Wishlist::assocSessionWishListToUser](#wishlistassocsessionwishlisttouseruser_id-session_id)
+
 ## Extending the Base Model to extra functionalities
 If needed you can create a Model file, extend the base Wishlist model to add extra functionalities.  
 In the following example, we'll add the `SoftDeletes` trait to have soft deletes in the wishlist table.

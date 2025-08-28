@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace javcorreia\Wishlist\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -6,7 +9,6 @@ use javcorreia\Wishlist\Wishlist;
 
 class WishlistServiceProvider extends ServiceProvider
 {
-
     /**
      * Bootstrap any application services.
      *
@@ -25,10 +27,11 @@ class WishlistServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $config = __DIR__ . '/../../config/wishlist.php';
+        $config = __DIR__.'/../../config/wishlist.php';
         $this->mergeConfigFrom($config, 'wishlist');
         $this->app->singleton('Wishlist', Wishlist::class);
     }
+
     // @codeCoverageIgnoreStart
     /**
      * Get the services provided by the provider.
@@ -49,7 +52,7 @@ class WishlistServiceProvider extends ServiceProvider
     public function publishMigrations()
     {
         $this->publishes([
-            __DIR__.'/../../database/migrations/' => database_path('/migrations')
+            __DIR__.'/../../database/migrations/' => database_path('/migrations'),
         ], 'migrations');
     }
     // @codeCoverageIgnoreEnd

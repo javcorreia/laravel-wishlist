@@ -1,62 +1,54 @@
 <?php
 
+declare(strict_types=1);
+
 namespace javcorreia\Wishlist;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use javcorreia\Wishlist\Models\Wishlist as WishlistModel;
 
 class Wishlist
 {
-	public Model $instance;
+    public WishlistModel $instance;
+
     private string $wishlistModel;
 
     public function __construct()
     {
         $this->wishlistModel = config('wishlist.model');
-    	$this->instance = new $this->wishlistModel;
+        $this->instance = new $this->wishlistModel;
     }
 
     /**
      * Adds a product to the wishlist associating it to a given user.
      * Returns false on failure.
-     *
-     * @param int $item
-     * @param int|string $user
-     * @param string $type
-     * @return bool
      */
-    public function add(int $item, int|string $user, string $type='user'): bool
+    public function add(int $item, int|string $user, string $type = 'user'): bool
     {
-        return Wishlist::create($item, $user, $type);
+        return self::create($item, $user, $type);
     }
 
     /**
      * Returns the wishlist of a specified user.
      *
-     * @param int|string $user
-     * @param string $type
-     * @return Collection
+     * @return Collection<int,WishlistModel|Model>
      */
-    public function getUserWishList(int|string $user, string $type='user'): Collection
+    public function getUserWishList(int|string $user, string $type = 'user'): Collection
     {
         return $this->instance->ofUser($user, $type)->get();
     }
 
     /**
      * Removes a specific wishlist entry from a given user.
-     *
-     * @param int $id
-     * @param int|string $user
-     * @param string $type
-     * @return bool|null
      */
-    public function remove(int $id, int|string $user, string $type='user'): bool|null
+    public function remove(int $id, int|string $user, string $type = 'user'): ?bool
     {
-        $wishList = $this->instance->where('id', $id)
-            ->ofUser($user, $type)->first();
+        $wishList = $this->instance->ofUser($user, $type)->where('id', $id)
+            ->first();
 
-        if (!$wishList) {
+        if (! $wishList) {
             return false;
         }
 
@@ -65,50 +57,32 @@ class Wishlist
 
     /**
      * Removes all values from a user wishlist.
-     *
-     * @param int|string $user
-     * @param string $type
-     * @return mixed
      */
-    public function removeUserWishList(int|string $user, string $type='user'): mixed
+    public function removeUserWishList(int|string $user, string $type = 'user'): mixed
     {
         return $this->instance->ofUser($user, $type)->delete();
     }
 
     /**
      * Removes a specific item from a specified user.
-     *
-     * @param int $item
-     * @param int|string $user
-     * @param string $type
-     * @return bool|null
      */
-    public function removeByItem(int $item, int|string $user, string $type='user'): bool|null
+    public function removeByItem(int $item, int|string $user, string $type = 'user'): ?bool
     {
         return $this->getWishListItem($item, $user, $type)->delete();
     }
 
     /**
      * Number of wishlist items by user
-     *
-     * @param int|string $user
-     * @param string $type
-     * @return int
      */
-    public function count(int|string $user, string $type='user'): int
+    public function count(int|string $user, string $type = 'user'): int
     {
         return $this->instance->ofUser($user, $type)->count();
     }
 
     /**
      * Get wishlist item from a user
-     *
-     * @param int $item
-     * @param int|string $user
-     * @param string $type
-     * @return Model
      */
-    public function getWishListItem(int $item, int|string $user, string $type='user'): Model
+    public function getWishListItem(int $item, int|string $user, string $type = 'user'): WishlistModel|Model|null
     {
         return $this->instance->byItem($item)
             ->ofUser($user, $type)->first();
@@ -116,10 +90,6 @@ class Wishlist
 
     /**
      * Associates a session_id wishlist to a given user_id wishlist.
-     *
-     * @param int $user_id
-     * @param string $session_id
-     * @return bool
      */
     public function assocSessionWishListToUser(int $user_id, string $session_id): bool
     {
@@ -131,8 +101,8 @@ class Wishlist
         try {
             DB::transaction(function () use ($sessionWishList, $user_id, $session_id) {
                 foreach ($sessionWishList as $sessionItem) {
-                    $association = Wishlist::create($sessionItem->item_id, $user_id);
-                    if (!$association) {
+                    $association = Wishlist::create($sessionItem->getAttribute('item_id'), $user_id);
+                    if (! $association) {
                         throw new \Exception('Error');
                     }
                 }
@@ -146,17 +116,17 @@ class Wishlist
         return true;
     }
 
-    protected static function create(int $item, int|string $user, string $type='user'): bool
+    protected static function create(int $item, int|string $user, string $type = 'user'): bool
     {
         $column = ($type === 'user') ? 'user_id' : 'session_id';
 
         $matchThese = [
             'item_id' => $item,
-            $column => $user
+            $column => $user,
         ];
 
-        $wishList =	config('wishlist.model')::updateOrCreate($matchThese, $matchThese);
+        $wishList = config('wishlist.model')::updateOrCreate($matchThese, $matchThese);
 
-        return !!$wishList;
+        return (bool) $wishList;
     }
 }
