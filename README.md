@@ -4,9 +4,10 @@ A simple Wishlist implementation for Laravel 11.\*|12.\*
 > **For Laravel versions 5.8|6|7|8|9|10** install previous stable version 3.1  
 > **If you have problems with the minimum PHP version of 8.0:** install previous stable version 2.2
 
-[![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
-[![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?format=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
-[![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+[![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+[![PHP Version Require](https://poser.pugx.org/javcorreia/laravel-wishlist/require/php?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+[![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+[![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 
 - saves items associated with users
 - saves items associated with sessions on anonymous navigation
