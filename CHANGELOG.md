@@ -12,8 +12,9 @@ This project follows [Keep a Changelog](https://keepachangelog.com/) and adheres
 ## [4.1.1] - 2025-08-28
 
 ### Added
-- `.gitattributes` file for more streamlined releases
+- added `.gitattributes` file for more streamlined releases
 - Added `PATCH` to versioning scheme, now following [Semantic Versioning](https://semver.org/) guidelines
+- added [`.editorconfig`](https://editorconfig.org/) file for consistent coding style
 
 ---
 
