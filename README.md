@@ -40,14 +40,14 @@ Publish the default configuration file:
 ```shell
 php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistServiceProvider"
 ```
-**Before running migration**, edit the required settings using the resulting `config/wishlist.php` file _([See Configuration](#Configuration))_.
+**Before running migration**, edit the required settings using the resulting `config/wishlist.php` file _([See Configuration](#configuration))_.
 
 To run migrations:
 ```shell
 php artisan migrate
 ```
 
-## Configuration 
+## Configuration
 
 Configuration was designed to be as flexible as changing the global configuration in the `config/wishlist.php` file.  
 You will need to provide at least, the model for the items to be wishlisted, for example:  
