@@ -1,6 +1,10 @@
 # Tests
 The tests are done with [PestPHP](https://pestphp.com/) and [Testbench](https://github.com/orchestral/testbench).
 
+# Table of contents
+- [Execute testing](#execute-testing)
+- [Current code coverage](#current-code-coverage)
+
 ## Execute testing
 Compose require dev packages.
 To execute them run the following:

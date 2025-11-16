@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 This project follows [Keep a Changelog](https://keepachangelog.com/) and adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
-- Nothing yet
+- [2025-11-16] changes on README.md for better clarity on older versions and their support status
 
 ---
 

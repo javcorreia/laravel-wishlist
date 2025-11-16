@@ -1,20 +1,33 @@
 # Laravel Wishlist
-
-A simple Wishlist implementation for Laravel 11.\*|12.\*
-> **For Laravel versions 5.8|6|7|8|9|10** install previous stable version 3.1  
-> **If you have problems with the minimum PHP version of 8.0:** install previous stable version 2.2
-
 [![Latest Stable Version](https://poser.pugx.org/javcorreia/laravel-wishlist/v/stable?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![PHP Version Require](https://poser.pugx.org/javcorreia/laravel-wishlist/require/php?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
+
+A simple Wishlist implementation for Laravel 11.\*|12.\*
+> see [Versions](#versions) for older Laravel versions
 
 - saves items associated with users
 - saves items associated with sessions on anonymous navigation
 - can retrieve items from a user or session
 - session items can be retrieved and associated with user on login
 
-> This was forked from the excellent [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist) with added functionality.
+> Forked from [Bhavinjr's](https://github.com/bhavinjr) [laravel-wishlist](https://github.com/bhavinjr/laravel-wishlist) with some added functionality and updated to latest Laravel and PHP versions.
+
+# Table of Contents
+- [Versions](#versions)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Documentation](#documentation)
+- [Testing](#testing)
+
+## Versions
+| Version | Supports                      | Status     |
+|---------|-------------------------------|------------|
+| 4.*     | Laravel [11, 12]; PHP >= 8.1  | current    |
+| 3.*     | Laravel [5.8, 10]; PHP >= 8.0 | deprecated |
+| 2.2     | Laravel [5.8, 9]; PHP ^7.2    | deprecated |
+| 2.0     | Laravel [5.8, 8]; PHP ^7.2    | deprecated |
 
 ## Installation
 
@@ -29,7 +42,7 @@ php artisan vendor:publish --provider="javcorreia\Wishlist\Providers\WishlistSer
 ```
 **Before running migration**, edit the required settings using the resulting `config/wishlist.php` file _([See Configuration](#Configuration))_.
 
-To create the table run migrations:
+To run migrations:
 ```shell
 php artisan migrate
 ```
