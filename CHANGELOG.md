@@ -6,6 +6,7 @@ This project follows [Keep a Changelog](https://keepachangelog.com/) and adheres
 
 ## [Unreleased]
 - [2026-04-02] changes on README.md for better clarity on older versions and their support status
+- [2026-04-02] test coverage increased to >90%
 
 ---
 

@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// @codeCoverageIgnoreStart
-
 namespace javcorreia\Wishlist\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -45,4 +43,3 @@ class Wishlist extends Model
         return $query->where('item_id', '=', $item);
     }
 }
-// @codeCoverageIgnoreEnd
