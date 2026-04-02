@@ -3,5 +3,6 @@
 composer.lock
 docker
 tests/coverage
+tests/code-coverage
 vendor
 .vscode

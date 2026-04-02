@@ -9,6 +9,21 @@ This project follows [Keep a Changelog](https://keepachangelog.com/) and adheres
 
 ---
 
+## [5.0] - 2026-04-02
+
+### Added
+- added support for Laravel 13
+- added support for PHP >=8.3
+- updated composer dev packages:
+  - `orchestra/testbench` to `^11.0`
+  - `pestphp/pest` to `^4.1`
+
+### Removed
+- removed support for Laravel 11 and 12
+- removed support for PHP <=8.2
+
+---
+
 ## [4.1.1] - 2025-08-28
 
 ### Added
