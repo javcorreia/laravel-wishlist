@@ -4,7 +4,7 @@
 [![License](https://poser.pugx.org/javcorreia/laravel-wishlist/license?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 [![Total Downloads](http://poser.pugx.org/javcorreia/laravel-wishlist/downloads?style=flat-square)](https://packagist.org/packages/javcorreia/laravel-wishlist)
 
-A simple Wishlist implementation for Laravel 11.\*|12.\*
+A simple Wishlist implementation for Laravel |13.\*
 > see [Versions](#versions) for older Laravel versions
 
 - saves items associated with users
@@ -24,7 +24,8 @@ A simple Wishlist implementation for Laravel 11.\*|12.\*
 ## Versions
 | Version | Supports                      | Status     |
 |---------|-------------------------------|------------|
-| 4.*     | Laravel [11, 12]; PHP >= 8.1  | current    |
+| 5.*     | Laravel [13]; PHP >= 8.3      | current    |
+| 4.*     | Laravel [11, 12]; PHP >= 8.1  | deprecated |
 | 3.*     | Laravel [5.8, 10]; PHP >= 8.0 | deprecated |
 | 2.2     | Laravel [5.8, 9]; PHP ^7.2    | deprecated |
 | 2.0     | Laravel [5.8, 8]; PHP ^7.2    | deprecated |
